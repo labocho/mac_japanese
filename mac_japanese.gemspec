@@ -14,4 +14,7 @@ Gem::Specification.new do |gem|
   gem.name          = "mac_japanese"
   gem.require_paths = ["lib"]
   gem.version       = MacJapanese::VERSION
+  gem.add_development_dependency "rspec", "~>2.11.0"
+  gem.add_development_dependency "guard-rspec", "~>0.7.0"
+  gem.add_development_dependency "ruby-debug19"
 end
