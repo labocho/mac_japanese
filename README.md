@@ -1,6 +1,6 @@
-# MacJapanese
+# mac_japanese
 
-TODO: Write a gem description
+Convert MacJapanese string to UTF-8 and vice versa.
 
 ## Installation
 
@@ -18,7 +18,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    require "mac_japanese"
+    MacJapanese.to_utf8("\x82\x9F") # => "あ"
+    MacJapanese.to_mac_japanese("あ") # => "\x82\x9F"
+
+    # composed character
+    # Convert with private using area character for reversible conversion
+    thirteen = MacJapanese.to_utf8("\x85\xAB") # => "?XIII"
+    MacJapanese.to_mac_japanese(thirteen) # => "\x85\xAB"
+
+    # composed character
+    # Convert without private using area character (irreversible conversion)
+    thirteen = MacJapanese.to_utf8("\x85\xAB", use_pua: false) # => "XIII"
+    MacJapanese.to_mac_japanese(thirteen) # => "XIII"
+
 
 ## Contributing
 

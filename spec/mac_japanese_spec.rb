@@ -28,19 +28,26 @@ describe MacJapanese do
           should == "\u{2474}"
         end
       end
-      context "use_pua" do
-        subject { MacJapanese.to_utf8(@src, use_pua: true) }
-        it "should expand composed char with pua" do
-          @src = "\x85\xAB".force_encoding("macjapan")
-          should == "\u{F862}\u{0058}\u{0049}\u{0049}\u{0049}"
-        end
+    end
+    context "default" do
+      subject { MacJapanese.to_utf8(@src) }
+      it "should expand composed char with pua" do
+        @src = "\x85\xAB".force_encoding("macjapan")
+        should == "\u{F862}\u{0058}\u{0049}\u{0049}\u{0049}"
       end
-      context "use_pua" do
-        subject { MacJapanese.to_utf8(@src, use_pua: false) }
-        it "should expand composed char without pua" do
-          @src = "\x85\xAB".force_encoding("macjapan")
-          should == "\u{0058}\u{0049}\u{0049}\u{0049}"
-        end
+    end
+    context "use_pua" do
+      subject { MacJapanese.to_utf8(@src, use_pua: true) }
+      it "should expand composed char with pua" do
+        @src = "\x85\xAB".force_encoding("macjapan")
+        should == "\u{F862}\u{0058}\u{0049}\u{0049}\u{0049}"
+      end
+    end
+    context "use_pua" do
+      subject { MacJapanese.to_utf8(@src, use_pua: false) }
+      it "should expand composed char without pua" do
+        @src = "\x85\xAB".force_encoding("macjapan")
+        should == "\u{0058}\u{0049}\u{0049}\u{0049}"
       end
     end
     context "pass another encoding string to .to_utf8" do
