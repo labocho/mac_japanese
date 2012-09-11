@@ -4,9 +4,9 @@ require File.expand_path('../lib/mac_japanese/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["labocho"]
   gem.email         = ["labocho@penguinlab.jp"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Convert MacJapanese string to UTF-8 and vice versa.}
+  gem.summary       = %q{Convert MacJapanese string to UTF-8 and vice versa.}
+  gem.homepage      = "https://github.com/labocho/mac_japanese"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

@@ -1,5 +1,8 @@
 #!/usr/bin/env rake
-task :build do
-  ruby "src/parse.rb"
+desc "Generate conversion tables"
+task :tables do
+  ruby "src/generate_conversion_tables.rb"
 end
+task :build => :parse
+
 require "bundler/gem_tasks"
