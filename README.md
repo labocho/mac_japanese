@@ -32,6 +32,9 @@ Or install it yourself as:
     thirteen = MacJapanese.to_utf8("\x85\xAB", use_pua: false) # => "XIII"
     MacJapanese.to_mac_japanese(thirteen) # => "XIII"
 
+## Limitation
+
+Ruby 1.8 (or earlier) is not supported.
 
 ## Contributing
 

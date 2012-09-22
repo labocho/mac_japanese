@@ -2,9 +2,9 @@ require "spec_helper"
 require "ruby-debug"
 
 describe MacJapanese do
-  describe ".to_utf" do
+  describe ".to_utf8" do
     [true, false].each do |use_pua|
-      context "#{use_pua ? "use" : "not use"} pua" do
+      context "user_pua: #{use_pua}" do
         let(:options) { {} }
         subject { MacJapanese.to_utf8(@src, options.merge(use_pua: use_pua)) }
         it "should convert us-ascii chars to utf8" do
@@ -36,14 +36,14 @@ describe MacJapanese do
         should == "\u{F862}\u{0058}\u{0049}\u{0049}\u{0049}"
       end
     end
-    context "use_pua" do
+    context "use_pua: true" do
       subject { MacJapanese.to_utf8(@src, use_pua: true) }
       it "should expand composed char with pua" do
         @src = "\x85\xAB".force_encoding("macjapan")
         should == "\u{F862}\u{0058}\u{0049}\u{0049}\u{0049}"
       end
     end
-    context "use_pua" do
+    context "use_pua: false" do
       subject { MacJapanese.to_utf8(@src, use_pua: false) }
       it "should expand composed char without pua" do
         @src = "\x85\xAB".force_encoding("macjapan")
@@ -118,16 +118,16 @@ describe MacJapanese do
   end
 
   context "undef: (none)" do
-    it "should raise Encoding::UndefinedConversionError" do
+    it "should raise Encoding::UndefinedConversionError for undefined mac japanese char" do
       @src = "foo\xFC\xFCbar".force_encoding("macjapan")
       expect{
         MacJapanese.to_utf8(@src)
       }.to raise_error(Encoding::UndefinedConversionError)
     end
-    it "should replace undefined mac utf-8 char" do
+    it "should raise Encoding::UndefinedConversionError for undefined utf-8 japanese char" do
       @src = "foo\u{FA11}bar"
       expect{
-        MacJapanese.to_mac_japanese(@src).should == "foo?bar"
+        MacJapanese.to_mac_japanese(@src)
       }.to raise_error(Encoding::UndefinedConversionError)
     end
   end
